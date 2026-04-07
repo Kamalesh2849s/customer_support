@@ -1,6 +1,9 @@
 import sys
-from support_triage_env.env import SupportTriageEnv, Action
-from support_triage_env.tasks import Task1BasicRoute, Task2InfoGathering, Task3PolicyResolution, Task4PromptInjection
+from env import SupportTriageEnv, Action
+from tasks.task1_basic_route import Task1BasicRoute
+from tasks.task2_info_gathering import Task2InfoGathering
+from tasks.task3_policy_resolution import Task3PolicyResolution
+from tasks.task4_prompt_injection import Task4PromptInjection
 
 def run_demo():
     print("=" * 60)
@@ -25,7 +28,7 @@ def run_demo():
         print("Invalid selection. Defaulting to Task 0.")
         task_idx = 0
         
-    obs = env.reset(task_idx)
+    obs, info = env.reset(task_idx=task_idx)
     done = False
     
     print("\n" + "="*40)

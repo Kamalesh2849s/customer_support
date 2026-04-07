@@ -12,8 +12,11 @@ except ImportError:
     print("Error: The 'openai' package is missing. Please run 'pip install openai'")
     sys.exit(1)
 
-from support_triage_env.env import SupportTriageEnv, Action
-from support_triage_env.tasks import Task1BasicRoute, Task2InfoGathering, Task3PolicyResolution, Task4PromptInjection
+from env import SupportTriageEnv, Action
+from tasks.task1_basic_route import Task1BasicRoute
+from tasks.task2_info_gathering import Task2InfoGathering
+from tasks.task3_policy_resolution import Task3PolicyResolution
+from tasks.task4_prompt_injection import Task4PromptInjection
 
 # Configuration and Validation
 HF_TOKEN = os.getenv("HF_TOKEN")
@@ -37,7 +40,7 @@ except Exception as e:
     sys.exit(1)
 
 def run_task(env: SupportTriageEnv, task_idx: int) -> float:
-    obs = env.reset(task_idx)
+    obs, info = env.reset(task_idx=task_idx)
     print(f"[START] Task {task_idx}")
     
     system_prompt = (

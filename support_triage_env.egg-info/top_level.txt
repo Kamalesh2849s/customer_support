@@ -1,1 +1,4 @@
+demo_interactive
 env
+inference
+tasks

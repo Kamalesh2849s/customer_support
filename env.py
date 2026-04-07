@@ -47,7 +47,11 @@ class SupportTriageEnv:
         self.current_task = None
         self.state_data = None
         
-    def reset(self, task_idx: Optional[int] = None) -> Observation:
+    def reset(self, *args, **kwargs) -> Tuple[Observation, Dict[str, Any]]:
+        task_idx = kwargs.get("task_idx")
+        if task_idx is None and "options" in kwargs and isinstance(kwargs["options"], dict):
+            task_idx = kwargs["options"].get("task_idx")
+            
         if task_idx is not None:
             self.current_task_idx = task_idx
         elif self.tasks and self.current_task_idx >= len(self.tasks):
@@ -71,13 +75,14 @@ class SupportTriageEnv:
             final_score=0.0
         )
         
-        return Observation(
+        obs = Observation(
             ticket_id=self.state_data.ticket_id,
             ticket_text=self.state_data.ticket_text,
             current_knowledge="No additional info gathered.",
             last_action_result="Environment reset.",
             is_done=False
         )
+        return obs, {}
         
     def step(self, action: Action) -> Tuple[Observation, Reward, bool, Dict[str, Any]]:
         self.state_data.step_count += 1
