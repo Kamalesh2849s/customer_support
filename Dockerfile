@@ -15,4 +15,5 @@ RUN pip install fastapi uvicorn pydantic openai
 EXPOSE 7860
 
 # We start the environment serving
-CMD ["openenv", "serve", "support_triage_env.env:SupportTriageEnv", "--port", "7860", "--host", "0.0.0.0"]
+WORKDIR /app/support_triage_env
+CMD ["openenv", "serve", "env:SupportTriageEnv", "--port", "7860", "--host", "0.0.0.0"]
