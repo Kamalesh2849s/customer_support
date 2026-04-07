@@ -1,17 +1,24 @@
 FROM python:3.10-slim
 
+# Hugging Face Spaces requires running as a non-root user!
+RUN useradd -m -u 1000 user
+ENV HOME=/home/user \
+    PATH=/home/user/.local/bin:$PATH
+
 WORKDIR /app
 
-# Copy everything into the Docker container
+# Copy and give ownership to the user
 COPY . /app
+RUN chown -R user:user /app
 
-# Install the nested package
-RUN pip install -e ./support_triage_env
+USER user
 
-# Install required packages for the proxy space
-RUN pip install fastapi uvicorn pydantic openai
+# Install everything locally for this user
+RUN pip install --no-cache-dir --upgrade pip
+RUN pip install --no-cache-dir ./support_triage_env
+RUN pip install --no-cache-dir fastapi uvicorn pydantic openai
 
-# OpenEnv convention says to start the FastAPI server on port 7860 for HF Spaces
+# OpenEnv convention says to start the FastAPI server on port 7860
 EXPOSE 7860
 
 # We start the environment serving
