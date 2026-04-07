@@ -15,7 +15,8 @@ USER user
 RUN pip install --no-cache-dir -e .
 RUN pip install --no-cache-dir fastapi uvicorn pydantic openai
 
-# OpenEnv convention says to start the FastAPI server on port 7860 for HF Spaces
+# OpenEnv convention says to start the FastAPI server on port 7860
 EXPOSE 7860
 
+# We start the environment serving at the root
 CMD ["openenv", "serve", "env:SupportTriageEnv", "--port", "7860", "--host", "0.0.0.0"]
