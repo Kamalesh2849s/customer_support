@@ -29,7 +29,20 @@ class State(BaseModel):
 
 class SupportTriageEnv:
     def __init__(self, tasks: List[Any] = None):
-        self.tasks = tasks or []
+        if not tasks:
+            from tasks.task1_basic_route import Task1BasicRoute
+            from tasks.task2_info_gathering import Task2InfoGathering
+            from tasks.task3_policy_resolution import Task3PolicyResolution
+            from tasks.task4_prompt_injection import Task4PromptInjection
+            self.tasks = [
+                Task1BasicRoute(),
+                Task2InfoGathering(),
+                Task3PolicyResolution(),
+                Task4PromptInjection()
+            ]
+        else:
+            self.tasks = tasks
+        
         self.current_task_idx = 0
         self.current_task = None
         self.state_data = None
