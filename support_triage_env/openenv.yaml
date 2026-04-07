@@ -1,0 +1,14 @@
+name: "support_triage_env"
+version: "0.1.0"
+description: "A real-world environment for Customer Support Ticket Triage where an agent must gather information, consult a Knowledge Base, and route or resolve tickets correctly."
+authors:
+  - name: "Agent Builder"
+    email: "builder@example.com"
+tags:
+  - "nlp"
+  - "customer-support"
+  - "triage"
+  - "real-world"
+attributes:
+  action_space: "Complex text-based actions (ask_customer, search_kb, route_ticket, resolve_ticket)"
+  observation_space: "Ticket text, gathered metadata, search results, and conversation history"

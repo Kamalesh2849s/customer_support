@@ -1,0 +1,17 @@
+[build-system]
+requires = ["setuptools>=61.0.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "support_triage_env"
+version = "0.1.0"
+description = "Customer Support Triage OpenEnv"
+authors = [{ name="Agent Builder", email="builder@example.com" }]
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "openenv",
+    "pydantic",
+    "fastapi",
+    "uvicorn"
+]
