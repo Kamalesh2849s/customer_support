@@ -15,3 +15,7 @@ dependencies = [
     "fastapi",
     "uvicorn"
 ]
+
+[tool.setuptools]
+py-modules = ["env", "inference", "demo_interactive"]
+packages = ["tasks"]
